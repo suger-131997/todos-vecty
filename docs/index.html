@@ -42,9 +42,9 @@ license that can be found in the LICENSE file.
 			await go.run(inst);
 			inst = await WebAssembly.instantiate(mod, go.importObject); // reset instance
 		}
-	</script>
 
-	<button onClick="run();" id="runButton" disabled>Run</button>
+		run();
+	</script>
 </body>
 
 </html>
