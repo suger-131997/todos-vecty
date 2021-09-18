@@ -26,22 +26,22 @@ func NewVisibleTodoList() *visibleTodoList {
 }
 
 func (a *visibleTodoList) Render() vecty.ComponentOrHTML {
-	todosState, _ := storeutil.TodosDispacher.StateOf(storeutil.TodosReducer).(storeutil.TodosState)
+	todosState, _ := storeutil.TodosDispacher.StateOf(storeutil.TodosReducer).([]model.Todo)
 	filterState, _ := storeutil.FilterDispacher.StateOf(storeutil.FilterReducer).(model.FilterType)
 
 	todos := make([]model.Todo, 0)
 
 	if filterState == model.All {
-		todos = append(todos, todosState.State...)
+		todos = append(todos, todosState...)
 	} else if filterState == model.Active {
 
-		for _, todo := range todosState.State {
+		for _, todo := range todosState {
 			if !todo.Completed {
 				todos = append(todos, todo)
 			}
 		}
 	} else if filterState == model.Completed {
-		for _, todo := range todosState.State {
+		for _, todo := range todosState {
 			if todo.Completed {
 				todos = append(todos, todo)
 			}
